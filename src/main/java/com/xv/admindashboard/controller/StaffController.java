@@ -43,6 +43,17 @@ public class StaffController {
     @PutMapping("/employees/{id}")
     public Staff updateStaff(@PathVariable(value = "id") Long staffId, @Valid @RequestBody Staff staffUpdate) throws Exception {
         Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new Exception("Staff not found" + staffId));
+        staff.setFirstName(staffUpdate.getFirstName());
+        staff.setLastName(staffUpdate.getLastName());
+        staff.setDateOfBirth(staffUpdate.getDateOfBirth());
+        staff.setGender(staffUpdate.getGender());
+        staff.setAddress(staffUpdate.getAddress());
+        staff.setIdentityNumber(staffUpdate.getIdentityNumber());
+        staff.setMobile(staffUpdate.getMobile());
+        staff.setSkype(staffUpdate.getSkype());
+        staff.setEmail(staffUpdate.getEmail());
+        staff.setDepartment(staffUpdate.getDepartment());
+        staff.setNotes(staffUpdate.getNotes());
         return this.staffRepository.save(staff);
     }
 
@@ -55,5 +66,4 @@ public class StaffController {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
-
 }
